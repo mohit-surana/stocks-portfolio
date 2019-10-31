@@ -26,4 +26,17 @@ Having recently started investing in stocks via Robinhood, I've often found myse
     - [ ] Making requests and parsing outputs
     - [ ] Smart fetch/prefetch to optimize unused rate limits (most excited about this!)
 
+**Run Instructions:**
+
+```
+$ python -m venv venv
+$ source venv/bin/activate
+$ pip install django
+$ cd stocks_mgmt/
+$ python manage.py migrate
+$ python manage.py runserver
+```
+
+The server will be running at http://127.0.0.1:8000/dashboard/
+
 If you would like to hack around on this project, or have any questions, feel free to reach out to me via email.
