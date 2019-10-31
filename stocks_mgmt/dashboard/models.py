@@ -26,6 +26,12 @@ class HistoricalStockPrice(models.Model):
     volume = models.IntegerField()
     time_added = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return (
+            f'({self.symbol.symbol}, date={self.date}, open={self.open_price}, close={self.close_price}, '
+            f'high={self.high}, low={self.low}, volume={self.volume})'
+        )
+
     class Meta:
         unique_together = (('symbol', 'date'),)
 

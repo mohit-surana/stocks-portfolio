@@ -25,13 +25,16 @@ Having recently started investing in stocks via Robinhood, I've often found myse
 - [ ] Working with external APIs (e.g. [Alpha Vantage](https://www.alphavantage.co/documentation/)) with rate limitations
     - [ ] Making requests and parsing outputs
     - [ ] Smart fetch/prefetch to optimize unused rate limits (most excited about this!)
+        - [ ] Provision for a read only mode
+        - [ ] User authentication to provided better control over API use
+        - [ ] Logging and log analytics to inform prefetch strategies 
 
 **Run Instructions:**
 
 ```
 $ python -m venv venv
 $ source venv/bin/activate
-$ pip install django
+$ pip install django requests
 $ cd stocks_mgmt/
 $ python manage.py migrate
 $ python manage.py runserver
