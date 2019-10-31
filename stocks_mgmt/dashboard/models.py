@@ -55,3 +55,24 @@ class IntradayStockPrice(models.Model):
 
     class Meta:
         unique_together = (('symbol', 'time'),)
+
+
+class Quote(models.Model):
+    symbol = models.OneToOneField(Ticker, primary_key=True, on_delete=models.CASCADE)
+    open_price = models.DecimalField(decimal_places=2, max_digits=16)
+    high = models.DecimalField(decimal_places=2, max_digits=16)
+    low = models.DecimalField(decimal_places=2, max_digits=16)
+    current_price = models.DecimalField(decimal_places=2, max_digits=16)
+    volume = models.IntegerField()
+    last_trading_day = models.DateField()
+    previous_close = models.DecimalField(decimal_places=2, max_digits=16)
+    time_added = models.DateTimeField(auto_now=True)
+
+    @property
+    def change(self):
+        print(type(self.current_price))
+        return self.current_price - self.previous_close
+
+    @property
+    def change_perc(self):
+        return f'{((self.current_price - self.previous_close) * 100 / self.previous_close):.4f}'

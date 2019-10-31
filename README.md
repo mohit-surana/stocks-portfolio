@@ -36,6 +36,7 @@ $ python -m venv venv
 $ source venv/bin/activate
 $ pip install django requests
 $ cd stocks_mgmt/
+$ python manage.py makemigrations
 $ python manage.py migrate
 $ python manage.py runserver
 ```
