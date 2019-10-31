@@ -122,3 +122,5 @@ STATIC_URL = '/static/'
 
 ALPHAVANTAGE_API_KEY = 'demo'
 
+ALPHAVANTAGE_BASE_URL = 'https://www.alphavantage.co'
+ALPHAVANTAGE_QUERY_URL = ALPHAVANTAGE_BASE_URL + '/query'
