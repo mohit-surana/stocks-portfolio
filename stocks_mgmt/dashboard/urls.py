@@ -9,5 +9,7 @@ urlpatterns = [
     path('add_ticker/<str:symbol>/<str:name>/', views.add_ticker, name='add_ticker'),
     path('view_historical/<str:symbol>/', views.view_historical, name='view_historical'),
     path('fetch_historical/<str:symbol>/', views.fetch_historical, name='fetch_historical'),
+    path('view_intraday/<str:symbol>/', views.view_intraday, name='view_intraday'),
+    path('fetch_intraday/<str:symbol>/', views.fetch_intraday, name='fetch_intraday'),
 ]
 

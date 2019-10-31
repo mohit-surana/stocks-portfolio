@@ -36,15 +36,22 @@ class HistoricalStockPrice(models.Model):
         unique_together = (('symbol', 'date'),)
 
 
+# TODO: Delete data older than two weeks periodically
 class IntradayStockPrice(models.Model):
     symbol = models.ForeignKey(Ticker, on_delete=models.CASCADE)
-    time = models.DateTimeField()
+    time = models.DateTimeField()  # In EST
     open_price = models.DecimalField(decimal_places=2, max_digits=16)
     close_price = models.DecimalField(decimal_places=2, max_digits=16)
     high = models.DecimalField(decimal_places=2, max_digits=16)
     low = models.DecimalField(decimal_places=2, max_digits=16)
     volume = models.IntegerField()
     time_added = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return (
+            f'({self.symbol.symbol}, time={self.time}, open={self.open_price}, close={self.close_price}, '
+            f'high={self.high}, low={self.low}, volume={self.volume})'
+        )
 
     class Meta:
         unique_together = (('symbol', 'time'),)
