@@ -3,7 +3,7 @@ import requests
 from django.conf import settings
 from django.db import transaction
 
-from .models import HistoricalStockPrice, IntradayStockPrice, Ticker
+from .models import HistoricalStockPrice, IntradayStockPrice, Quote, Ticker
 
 
 def alphavantage_request(function, **query_params):
@@ -70,5 +70,35 @@ def fetch_intraday_price(symbol, outputsize='full', interval='5min'):
                 symbol=ticker_object,
                 time=time,
             )
+    else:
+        raise Exception(f'Add ticker {symbol=} to the database first!')
+
+
+@transaction.atomic
+def fetch_quote(symbol):
+    ticker_object = Ticker.objects.filter(symbol=symbol).first()
+    if ticker_object:
+        response = alphavantage_request(
+            function='GLOBAL_QUOTE',
+            symbol=symbol,
+        )
+        result = response.json()
+        data = result['Global Quote']
+        quote_obj, created = Quote.objects.update_or_create(
+            defaults={
+                'symbol': ticker_object,
+                'open_price': data['02. open'],
+                'high': data['03. high'],
+                'low': data['04. low'],
+                'current_price': data['05. price'],
+                'volume': data['06. volume'],
+                'last_trading_day': data['07. latest trading day'],
+                'previous_close': data['08. previous close'],
+            },
+            symbol=ticker_object,
+        )
+        # This allows us to coerce the input fields from str into the correct data type
+        quote_obj.refresh_from_db()
+        return quote_obj
     else:
         raise Exception(f'Add ticker {symbol=} to the database first!')

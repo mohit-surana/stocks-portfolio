@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import HistoricalStockPrice, IntradayStockPrice, Ticker
-from .external_calls import fetch_historical_price, fetch_intraday_price
+from .models import HistoricalStockPrice, IntradayStockPrice, Quote, Ticker
+from .external_calls import fetch_historical_price, fetch_intraday_price, fetch_quote
 
 
 def index(request):
@@ -37,3 +37,8 @@ def view_intraday(request, symbol):
 def fetch_intraday(request, symbol):
     fetch_intraday_price(symbol)
     return HttpResponse(f'Fetched the intraday stock price for {symbol=}!')
+
+# TODO: Improve error handling
+def get_quote(request, symbol):
+    quote = fetch_quote(symbol)
+    return HttpResponse(quote)
