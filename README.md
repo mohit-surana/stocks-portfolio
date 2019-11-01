@@ -34,7 +34,7 @@ Having recently started investing in stocks via Robinhood, I've often found myse
 ```
 $ python -m venv venv
 $ source venv/bin/activate
-$ pip install django requests
+$ pip install -r requirements.txt
 $ cd stocks_mgmt/
 $ python manage.py makemigrations
 $ python manage.py migrate

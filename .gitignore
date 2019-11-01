@@ -106,4 +106,4 @@ venv.bak/
 # Custom files
 .idea
 stocks_mgmt/stocks_mgmt/settings.py
-
+iframe_figures/

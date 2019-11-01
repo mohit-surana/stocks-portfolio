@@ -1,0 +1,7 @@
+django
+ipython
+nbformat
+pandas
+plotly
+requests
+
