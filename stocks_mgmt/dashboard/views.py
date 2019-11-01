@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from .models import HistoricalStockPrice, IntradayStockPrice, Quote, Ticker
 from .external_calls import fetch_historical_price, fetch_intraday_price, fetch_quote
-
+from .utils import plot_chart
 
 def index(request):
     return HttpResponse('Moon lambo is not too far away!')
@@ -42,3 +42,7 @@ def fetch_intraday(request, symbol):
 def get_quote(request, symbol):
     quote = fetch_quote(symbol)
     return HttpResponse(quote)
+
+def visualization(request, symbol):
+    plot_chart(symbol, duration='1y')
+    return HttpResponse('Check out the other browser tab!')

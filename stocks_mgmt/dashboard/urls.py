@@ -12,4 +12,6 @@ urlpatterns = [
     path('view_intraday/<str:symbol>/', views.view_intraday, name='view_intraday'),
     path('fetch_intraday/<str:symbol>/', views.fetch_intraday, name='fetch_intraday'),
     path('get_quote/<str:symbol>/', views.get_quote, name='get_quote'),  # Always fetch and view quote to keep it fresh
+    path('visualization/<str:symbol>/', views.visualization, name='visualization'),
+    # TODO: Figure out a clean way to reuse endpoints for fetching visualizations
 ]
